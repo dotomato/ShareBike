@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.chen.sharebike.CustomView.AlbumView;
 import com.chen.sharebike.DataModel.MyCode;
 import com.chen.sharebike.DataModel.MyCodeResult;
 import com.chen.sharebike.Server.MyAction1;
@@ -16,9 +17,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.annotations.Beta;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AlbumView.OnExitCallback{
 
 
     final static String TAG = "MainActivity";
@@ -28,12 +30,18 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.backImageView)
     public ImageView mBackImageView;
 
+    @BindView(R.id.albumView)
+    public AlbumView mAlbumView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         Glide.with(this).load(R.drawable.back).into(mBackImageView);
+        mAlbumView.setOnExitCallback(this);
+        mBackImageView.setScaleX(1.2f);
+        mBackImageView.setScaleY(1.2f);
     }
 
     @OnClick(R.id.scanButton)
@@ -66,4 +74,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onExit() {
+        mBackImageView.animate().scaleX(1).scaleY(1).setDuration(1000).start();
+    }
 }

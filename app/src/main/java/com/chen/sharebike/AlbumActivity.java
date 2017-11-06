@@ -27,26 +27,26 @@ public class AlbumActivity extends AppCompatActivity {
         setContentView(R.layout.activity_album);
         ButterKnife.bind(this);
 
-        imageView = new ImageView(this);
-        Drawable drawableColor = new ColorDrawable(Color.rgb(255, 0, 0));
-//        imageView.setColorFilter(Color.rgb(255,0,0));
-        imageView.setLayoutParams(new FrameLayout.LayoutParams(2000, 40));
-
-        imageView.setImageDrawable(drawableColor);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            imageView.setElevation(30f);
-        }
-        mRoot.addView(imageView);
-
-        imageView.postDelayed(aniRunnable, 33);
-        imageView.post(new Runnable() {
-            @Override
-            public void run() {
-
-                imageView.setTop(100);
-            }
-        });
-        OutlineProvider.setOutline(imageView, OutlineProvider.SHAPE_RECT);
+//        imageView = new ImageView(this);
+//        Drawable drawableColor = new ColorDrawable(Color.rgb(255, 0, 0));
+////        imageView.setColorFilter(Color.rgb(255,0,0));
+//        imageView.setLayoutParams(new FrameLayout.LayoutParams(2000, 40));
+//
+//        imageView.setImageDrawable(drawableColor);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            imageView.setElevation(30f);
+//        }
+//        mRoot.addView(imageView);
+//
+//        imageView.postDelayed(aniRunnable, 33);
+//        imageView.post(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                imageView.setTop(100);
+//            }
+//        });
+//        OutlineProvider.setOutline(imageView, OutlineProvider.SHAPE_RECT);
     }
 
     Runnable aniRunnable = new Runnable() {
