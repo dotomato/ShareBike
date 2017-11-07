@@ -1,4 +1,4 @@
-package com.chen.sharebike.CustomView;
+package com.dotomato.fringelaunchview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,16 +13,15 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.chen.sharebike.R;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Created by chen on 2017/11/6.
+ * Created by chen on 2017/11/7.
  */
 
-public class AlbumView extends View {
+public class FringeLaunchView extends View {
+
 
     private NinePatch patch;
     private RectGroup rectGroup1;
@@ -36,17 +35,17 @@ public class AlbumView extends View {
     private Paint paint;
     private Rect rect;
 
-    public AlbumView(Context context) {
+    public FringeLaunchView(Context context) {
         super(context);
         init(context);
     }
 
-    public AlbumView(Context context, @Nullable AttributeSet attrs) {
+    public FringeLaunchView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public AlbumView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public FringeLaunchView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
@@ -327,6 +326,5 @@ public class AlbumView extends View {
     public void setOnExitCallback(OnExitCallback callback){
         mOnExitCallback = callback;
     }
-
 
 }

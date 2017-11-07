@@ -6,21 +6,20 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.chen.sharebike.CustomView.AlbumView;
 import com.chen.sharebike.DataModel.MyCode;
 import com.chen.sharebike.DataModel.MyCodeResult;
 import com.chen.sharebike.Server.MyAction1;
 import com.chen.sharebike.Server.Server;
+import com.dotomato.fringelaunchview.FringeLaunchView;
 import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.annotations.Beta;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements AlbumView.OnExitCallback{
+public class MainActivity extends AppCompatActivity implements FringeLaunchView.OnExitCallback{
 
 
     final static String TAG = "MainActivity";
@@ -30,8 +29,8 @@ public class MainActivity extends AppCompatActivity implements AlbumView.OnExitC
     @BindView(R.id.backImageView)
     public ImageView mBackImageView;
 
-    @BindView(R.id.albumView)
-    public AlbumView mAlbumView;
+    @BindView(R.id.fringleLaunchView)
+    public FringeLaunchView mFringeLaunchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements AlbumView.OnExitC
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         Glide.with(this).load(R.drawable.back).into(mBackImageView);
-        mAlbumView.setOnExitCallback(this);
+        mFringeLaunchView.setOnExitCallback(this);
         mBackImageView.setScaleX(1.2f);
         mBackImageView.setScaleY(1.2f);
     }
