@@ -24,8 +24,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile  project(':fringelaunchview')
-//    compile 'com.github.dotomato:ShareBike:0.0.3'
+//    compile  project(':fringelaunchview')
+    compile 'com.github.dotomato:ShareBike:0.0.4'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta5'
     compile 'me.dm7.barcodescanner:zxing:1.7.2'

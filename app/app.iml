@@ -134,6 +134,5 @@
     <orderEntry type="library" exported="" name="me.dm7.barcodescanner:core-1.7.2" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-annotations:25.3.1@jar" level="project" />
     <orderEntry type="library" exported="" name="com.github.bumptech.glide:glide:3.7.0@jar" level="project" />
-    <orderEntry type="module" module-name="fringelaunchview" exported="" />
   </component>
 </module>

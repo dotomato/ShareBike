@@ -1,1 +1,1 @@
-include ':app', ':fringelaunchview'
+include ':app'
