@@ -10,7 +10,6 @@ import com.chen.sharebike.DataModel.MyCode;
 import com.chen.sharebike.DataModel.MyCodeResult;
 import com.chen.sharebike.Server.MyAction1;
 import com.chen.sharebike.Server.Server;
-import com.dotomato.fringelaunchview.FringeLaunchView;
 import com.google.gson.Gson;
 
 import butterknife.BindView;
@@ -18,6 +17,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import top.dotomato.library.FringeLaunchView;
+
 
 public class MainActivity extends AppCompatActivity implements FringeLaunchView.OnExitCallback{
 
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements FringeLaunchView.
         ButterKnife.bind(this);
         Glide.with(this).load(R.drawable.back).into(mBackImageView);
         mFringeLaunchView.setOnExitCallback(this);
+        mFringeLaunchView.start();
         mBackImageView.setScaleX(1.2f);
         mBackImageView.setScaleY(1.2f);
     }
