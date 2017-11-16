@@ -3,13 +3,13 @@ package com.chen.sharebike;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.chen.sharebike.DataModel.GetRestResult;
 import com.chen.sharebike.DataModel.GetRest;
 import com.chen.sharebike.Server.MyAction1;
 import com.chen.sharebike.Server.Server;
-import com.dd.CircularProgressButton;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -32,7 +32,7 @@ public class StatementActivity extends AppCompatActivity {
     public TextView mRestView;
 
     @BindView(R.id.stateButton)
-    public CircularProgressButton mStateButton;
+    public Button mStateButton;
 
     private int mTimeCount;
     private float mMoney;
@@ -57,25 +57,29 @@ public class StatementActivity extends AppCompatActivity {
         mRest = AccountManager.getIns(this).getRest();
         mRestView.setText(String.format(Locale.CHINA, "%1.2f元", mRest));
 
-        mStateButton.setIndeterminateProgressMode(true);
+//        mStateButton.setIndeterminateProgressMode(true);
     }
 
     @OnClick(R.id.stateButton)
     public void stateButtonClick(){
         AccountManager.getIns(this).setRest(mRest - mMoney);
-        mStateButton.setProgress(50);
+        mStateButton.setText("请稍等......");
+
         mStateButton.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mStateButton.setProgress(100);
+                mStateButton.setText("付款成功");
+                mStateButton.setEnabled(false);
             }
-        }, 2000);
+        }, 1000);
+
         mStateButton.postDelayed(new Runnable() {
             @Override
             public void run() {
                 StatementActivity.this.finish();
             }
-        }, 3000);
+        }, 2000);
+
     }
 
     @Override

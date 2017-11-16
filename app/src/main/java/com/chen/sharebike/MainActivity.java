@@ -53,18 +53,20 @@ public class MainActivity extends AppCompatActivity{
                 MyCode myCode = gson.fromJson(result, MyCode.class);
                 if (!myCode.type.equals("car"))
                     return;
-                Server.getApi().borrowCar(myCode)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new MyAction1<MyCodeResult>() {
-                            @Override
-                            public void call() {
-                                if (mVar.result.equals("success")){
-                                    Intent i = new Intent(MainActivity.this, UsingActivity.class);
+//                Server.getApi().borrowCar(myCode)
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(new MyAction1<MyCodeResult>() {
+//                            @Override
+//                            public void call() {
+//                                if (mVar.result.equals("success")){
+//                                    Intent i = new Intent(MainActivity.this, UsingActivity.class);
+//                                    MainActivity.this.startActivity(i);
+//                                }
+//                            }
+//                        });
+                Intent i = new Intent(MainActivity.this, UsingActivity.class);
                                     MainActivity.this.startActivity(i);
-                                }
-                            }
-                        });
             }
         }
     }

@@ -77,20 +77,24 @@ public class UsingActivity extends AppCompatActivity {
                 if (!myCode.type.equals("pile"))
                     return;
                 mTimerEnable = false;
-                Server.getApi().returnCar(myCode)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new MyAction1<MyCodeResult>() {
-                            @Override
-                            public void call() {
-                                if (mVar.result.equals("success")) {
-                                    Intent i = new Intent(UsingActivity.this, StatementActivity.class);
-                                    i.putExtra("TimeCount", mTimeCount);
-                                    UsingActivity.this.startActivity(i);
-                                    UsingActivity.this.finish();
-                                }
-                            }
-                        });
+//                Server.getApi().returnCar(myCode)
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(new MyAction1<MyCodeResult>() {
+//                            @Override
+//                            public void call() {
+//                                if (mVar.result.equals("success")) {
+//                                    Intent i = new Intent(UsingActivity.this, StatementActivity.class);
+//                                    i.putExtra("TimeCount", mTimeCount);
+//                                    UsingActivity.this.startActivity(i);
+//                                    UsingActivity.this.finish();
+//                                }
+//                            }
+//                        });
+                Intent i = new Intent(UsingActivity.this, StatementActivity.class);
+                i.putExtra("TimeCount", mTimeCount);
+                UsingActivity.this.startActivity(i);
+                UsingActivity.this.finish();
             }
         }
     }

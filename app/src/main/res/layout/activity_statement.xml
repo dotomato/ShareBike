@@ -96,17 +96,16 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/textView9"
         app:layout_constraintLeft_toLeftOf="@+id/moneyView" />
 
-    <com.dd.CircularProgressButton
+    <Button
         android:id="@+id/stateButton"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="200dp"
         android:layout_height="80dp"
         android:layout_marginBottom="50dp"
         android:background="@color/colorPrimary"
+        android:text="付款"
         android:textColor="@android:color/white"
         android:textSize="24sp"
-        app:cpb_textIdle="付款"
-        app:cpb_textComplete="付款完成！"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
