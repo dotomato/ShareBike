@@ -17,10 +17,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import top.dotomato.library.FringeLaunchView;
 
 
-public class MainActivity extends AppCompatActivity implements FringeLaunchView.OnExitCallback{
+public class MainActivity extends AppCompatActivity{
 
 
     final static String TAG = "MainActivity";
@@ -30,17 +29,12 @@ public class MainActivity extends AppCompatActivity implements FringeLaunchView.
     @BindView(R.id.backImageView)
     public ImageView mBackImageView;
 
-    @BindView(R.id.fringleLaunchView)
-    public FringeLaunchView mFringeLaunchView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         Glide.with(this).load(R.drawable.back).into(mBackImageView);
-        mFringeLaunchView.setOnExitCallback(this);
-        mFringeLaunchView.start();
         mBackImageView.setScaleX(1.2f);
         mBackImageView.setScaleY(1.2f);
     }
@@ -73,10 +67,5 @@ public class MainActivity extends AppCompatActivity implements FringeLaunchView.
                         });
             }
         }
-    }
-
-    @Override
-    public void onExit() {
-        mBackImageView.animate().scaleX(1).scaleY(1).setDuration(1000).start();
     }
 }

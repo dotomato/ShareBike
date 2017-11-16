@@ -19,17 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AlbumActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
         <activity android:name=".ScanActivity" />
         <activity android:name=".UsingActivity" />
         <activity android:name=".StatementActivity" />
-
     </application>
 
 </manifest>
