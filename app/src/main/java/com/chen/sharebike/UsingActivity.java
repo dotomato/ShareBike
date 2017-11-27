@@ -3,6 +3,7 @@ package com.chen.sharebike;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class UsingActivity extends AppCompatActivity {
     private int mTimeCount;
     private String id;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,26 +53,30 @@ public class UsingActivity extends AppCompatActivity {
             int t3 = (mTimeCount / 3600) % 60;
             mTimeView.setText(String.format(Locale.CHINA, "%02d:%02d:%02d", t3, t2, t1));
             mTimeCount += 1;
-            if (mTimerEnable)
+            if (mTimerEnable) {
                 mTimeView.postDelayed(this, 1000);
+                MyCode myCode = new MyCode();
+                myCode.id = UsingActivity.this.id;
+                myCode.type = "car";
+                Server.getApi().is_return(myCode)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new MyAction1<MyCodeResult>() {
+                            @Override
+                            public void call() {
+                                Log.d("aaaa", mVar.result);
+                                if (mVar.result.equals("return")) {
+                                    mTimerEnable = false;
 
-            MyCode myCode = new MyCode();
-            myCode.id = UsingActivity.this.id;
-            myCode.type = "car";
-            Server.getApi().is_return(myCode)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new MyAction1<MyCodeResult>() {
-                        @Override
-                        public void call() {
-                            if (mVar.result.equals("return")) {
-                                Intent i = new Intent(UsingActivity.this, StatementActivity.class);
-                                i.putExtra("TimeCount", mTimeCount);
-                                UsingActivity.this.startActivity(i);
-                                UsingActivity.this.finish();
+                                }
                             }
-                        }
-                    });
+                        });
+            } else {
+                Intent i = new Intent(UsingActivity.this, StatementActivity.class);
+                i.putExtra("TimeCount", mTimeCount);
+                UsingActivity.this.startActivity(i);
+                UsingActivity.this.finish();
+            }
         }
     };
 

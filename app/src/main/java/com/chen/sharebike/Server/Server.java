@@ -34,10 +34,6 @@ public class Server {
         Observable<MyCodeResult> borrowCar(@Body MyCode var);
 
         @Headers({"Content-Type: application/json", "Accept: application/json"})
-        @POST(VERSION + "/return_car")
-        Observable<MyCodeResult> returnCar(@Body MyCode var);
-
-        @Headers({"Content-Type: application/json", "Accept: application/json"})
         @POST(VERSION + "/is_return")
         Observable<MyCodeResult> is_return(@Body MyCode var);
 

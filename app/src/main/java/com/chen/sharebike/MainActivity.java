@@ -41,6 +41,27 @@ public class MainActivity extends AppCompatActivity{
 
     @OnClick(R.id.scanButton)
     public void scanButtonClick(){
+//        测试用
+//        final MyCode myCode = new MyCode();
+//        myCode.id = "123";
+//        Server.getApi().borrowCar(myCode)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new MyAction1<MyCodeResult>() {
+//                    @Override
+//                    public void call() {
+//                        if (mVar.result.equals("success")){
+//                            Intent i = new Intent(MainActivity.this, UsingActivity.class);
+//                            i.putExtra("id", myCode.id);
+//                            MainActivity.this.startActivity(i);
+//                        }
+//                    }
+//                });
+//
+//        Intent i = new Intent(MainActivity.this, UsingActivity.class);
+//        i.putExtra("id", "123");
+//        MainActivity.this.startActivity(i);
+
         Intent i = new Intent(this, ScanActivity.class);
         this.startActivityForResult(i, SCAN_CODE);
     }
@@ -50,25 +71,22 @@ public class MainActivity extends AppCompatActivity{
             if (resultCode == RESULT_OK){
                 String result = data.getStringExtra("code");
                 Gson gson = new Gson();
-                MyCode myCode = gson.fromJson(result, MyCode.class);
+                final MyCode myCode = gson.fromJson(result, MyCode.class);
                 if (!myCode.type.equals("car"))
                     return;
-//                Server.getApi().borrowCar(myCode)
-//                        .subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(new MyAction1<MyCodeResult>() {
-//                            @Override
-//                            public void call() {
-//                                if (mVar.result.equals("success")){
-//                                    Intent i = new Intent(MainActivity.this, UsingActivity.class);
-//                                    MainActivity.this.startActivity(i);
-//                                }
-//                            }
-//                        });
-
-                Intent i = new Intent(MainActivity.this, UsingActivity.class);
-                i.putExtra("id", myCode.id);
-                MainActivity.this.startActivity(i);
+                Server.getApi().borrowCar(myCode)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new MyAction1<MyCodeResult>() {
+                            @Override
+                            public void call() {
+                                if (mVar.result.equals("success")){
+                                    Intent i = new Intent(MainActivity.this, UsingActivity.class);
+                                    i.putExtra("id", myCode.id);
+                                    MainActivity.this.startActivity(i);
+                                }
+                            }
+                        });
             }
         }
     }
