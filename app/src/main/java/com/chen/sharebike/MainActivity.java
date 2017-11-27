@@ -65,8 +65,10 @@ public class MainActivity extends AppCompatActivity{
 //                                }
 //                            }
 //                        });
+
                 Intent i = new Intent(MainActivity.this, UsingActivity.class);
-                                    MainActivity.this.startActivity(i);
+                i.putExtra("id", myCode.id);
+                MainActivity.this.startActivity(i);
             }
         }
     }

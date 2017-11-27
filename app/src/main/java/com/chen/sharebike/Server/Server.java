@@ -24,7 +24,7 @@ public class Server {
     final static private String TAG = "Server";
 
     //    final static private String BASEURL = "www.dotomato.win";
-    final static private String BASEURL = "http://192.168.1.113:5001";
+    final static private String BASEURL = "http://dotomato.top:5001"; //这里要填上树莓派的地址
     final static private String VERSION = "/api/v0.01";
 
     public interface ServerInterface {
@@ -36,6 +36,10 @@ public class Server {
         @Headers({"Content-Type: application/json", "Accept: application/json"})
         @POST(VERSION + "/return_car")
         Observable<MyCodeResult> returnCar(@Body MyCode var);
+
+        @Headers({"Content-Type: application/json", "Accept: application/json"})
+        @POST(VERSION + "/is_return")
+        Observable<MyCodeResult> is_return(@Body MyCode var);
 
     }
 

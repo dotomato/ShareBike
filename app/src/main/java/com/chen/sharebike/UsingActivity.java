@@ -27,10 +27,8 @@ public class UsingActivity extends AppCompatActivity {
     @BindView(R.id.timeView)
     public TextView mTimeView;
 
-    @BindView(R.id.stopButton)
-    public Button mStopButton;
-
     private int mTimeCount;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +38,8 @@ public class UsingActivity extends AppCompatActivity {
         mTimeView.post(mTimer);
         mTimeCount = 0;
         mTimerEnable = true;
+        Intent i = getIntent();
+        id = i.getStringExtra("id");
     }
 
     private boolean mTimerEnable;
@@ -53,49 +53,29 @@ public class UsingActivity extends AppCompatActivity {
             mTimeCount += 1;
             if (mTimerEnable)
                 mTimeView.postDelayed(this, 1000);
+
+            MyCode myCode = new MyCode();
+            myCode.id = UsingActivity.this.id;
+            myCode.type = "car";
+            Server.getApi().is_return(myCode)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new MyAction1<MyCodeResult>() {
+                        @Override
+                        public void call() {
+                            if (mVar.result.equals("return")) {
+                                Intent i = new Intent(UsingActivity.this, StatementActivity.class);
+                                i.putExtra("TimeCount", mTimeCount);
+                                UsingActivity.this.startActivity(i);
+                                UsingActivity.this.finish();
+                            }
+                        }
+                    });
         }
     };
 
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-    }
-
-    @OnClick(R.id.stopButton)
-    public void stopButtonClick(){
-        Intent i = new Intent(this, ScanActivity.class);
-        this.startActivityForResult(i, SCAN_CODE);
-    }
-
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        if (requestCode == SCAN_CODE){
-            if (resultCode == RESULT_OK){
-                String result = data.getStringExtra("code");
-                Gson gson = new Gson();
-                MyCode myCode = gson.fromJson(result, MyCode.class);
-                if (!myCode.type.equals("pile"))
-                    return;
-                mTimerEnable = false;
-//                Server.getApi().returnCar(myCode)
-//                        .subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(new MyAction1<MyCodeResult>() {
-//                            @Override
-//                            public void call() {
-//                                if (mVar.result.equals("success")) {
-//                                    Intent i = new Intent(UsingActivity.this, StatementActivity.class);
-//                                    i.putExtra("TimeCount", mTimeCount);
-//                                    UsingActivity.this.startActivity(i);
-//                                    UsingActivity.this.finish();
-//                                }
-//                            }
-//                        });
-                Intent i = new Intent(UsingActivity.this, StatementActivity.class);
-                i.putExtra("TimeCount", mTimeCount);
-                UsingActivity.this.startActivity(i);
-                UsingActivity.this.finish();
-            }
-        }
     }
 }
